@@ -1,6 +1,11 @@
 import { ExperimentalMessage, experimental_generateObject } from 'ai'
-import { openai } from 'ai/openai'
 import { nextActionSchema } from '../schema/next-action'
+import { OpenAI } from 'ai/openai'
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseUrl: process.env.OEPNAI_BASE_URL
+})
 
 // Decide whether inquiry is required for the user input
 export async function taskManager(messages: ExperimentalMessage[]) {

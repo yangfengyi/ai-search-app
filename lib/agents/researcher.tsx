@@ -7,13 +7,18 @@ import {
 } from 'ai'
 import { searchSchema } from '@/lib/schema/search'
 import { Section } from '@/components/section'
-import { openai } from 'ai/openai'
 import { ToolBadge } from '@/components/tool-badge'
 import { SearchSkeleton } from '@/components/search-skeleton'
 import { SearchResults } from '@/components/search-results'
 import { BotMessage } from '@/components/message'
 import Exa from 'exa-js'
 import { SearchResultsImageSection } from '@/components/search-results-image'
+import { OpenAI } from 'ai/openai'
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseUrl: process.env.OEPNAI_BASE_URL
+})
 
 export async function researcher(
   uiStream: ReturnType<typeof createStreamableUI>,

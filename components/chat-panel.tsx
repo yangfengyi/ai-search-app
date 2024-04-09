@@ -1,21 +1,18 @@
 import { useEffect, useState, useRef } from 'react'
 import type { AI } from '@/app/action'
 import { useUIState, useActions, useAIState } from 'ai/rsc'
-import { cn } from '@/lib/utils'
 import { UserMessage } from './user-message'
 import { Input } from './ui/input'
 import { Button } from './ui/button'
-import { ArrowRight, Plus, Square } from 'lucide-react'
-import { EmptyScreen } from './empty-screen'
+import { ArrowRight, Plus } from 'lucide-react'
 
 export function ChatPanel() {
   const [input, setInput] = useState('')
   const [messages, setMessages] = useUIState<typeof AI>()
-  const [aiMessages, setAiMessages] = useAIState<typeof AI>()
+  const [, setAiMessages] = useAIState<typeof AI>()
   const { submit } = useActions<typeof AI>()
   const [isButtonPressed, setIsButtonPressed] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
-  const [showEmptyScreen, setShowEmptyScreen] = useState(false)
   // Focus on input when button is pressed
   useEffect(() => {
     if (isButtonPressed) {
@@ -99,12 +96,7 @@ export function ChatPanel() {
             placeholder="Ask a question..."
             value={input}
             className="pl-4 pr-10 h-12 rounded-full bg-muted"
-            onChange={e => {
-              setInput(e.target.value)
-              setShowEmptyScreen(e.target.value.length === 0)
-            }}
-            onFocus={() => setShowEmptyScreen(true)}
-            onBlur={() => setShowEmptyScreen(false)}
+            onChange={e => setInput(e.target.value)}
           />
           <Button
             type="submit"
@@ -116,12 +108,12 @@ export function ChatPanel() {
             <ArrowRight size={20} />
           </Button>
         </div>
-        <EmptyScreen
+        {/* <EmptyScreen
           submitMessage={message => {
             setInput(message)
           }}
           className={cn(showEmptyScreen ? 'visible' : 'invisible')}
-        />
+        /> */}
       </form>
     </div>
   )

@@ -1,8 +1,13 @@
-import { openai } from 'ai/openai'
 import { Copilot } from '@/components/copilot'
 import { createStreamableUI, createStreamableValue } from 'ai/rsc'
 import { ExperimentalMessage, experimental_streamObject } from 'ai'
 import { PartialInquiry, inquirySchema } from '@/lib/schema/inquiry'
+import { OpenAI } from 'ai/openai'
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseUrl: process.env.OEPNAI_BASE_URL
+})
 
 export async function inquire(
   uiStream: ReturnType<typeof createStreamableUI>,

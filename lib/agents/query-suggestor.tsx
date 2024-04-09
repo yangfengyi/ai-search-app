@@ -3,7 +3,12 @@ import { ExperimentalMessage, experimental_streamObject } from 'ai'
 import { PartialRelated, relatedSchema } from '@/lib/schema/related'
 import { Section } from '@/components/section'
 import SearchRelated from '@/components/search-related'
-import { openai } from 'ai/openai'
+import { OpenAI } from 'ai/openai'
+
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY,
+  baseUrl: process.env.OEPNAI_BASE_URL
+})
 
 export async function querySuggestor(
   uiStream: ReturnType<typeof createStreamableUI>,
